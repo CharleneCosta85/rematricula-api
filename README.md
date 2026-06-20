@@ -30,39 +30,49 @@ O banco de dados foi modelado para refletir a estrutura acadêmica real, contend
 
 ## 🚀 Como Executar o Projeto
 
-### 1. Clonar o Repositório
-```bash
-git clone https://github.com/CharleneCosta85/rematricula-api.git
+1. Clonar o Repositório
+git clone https://github.com/CharleneCosta85/rematricula-api.git  
 cd rematricula-api
-2. Instalar as Dependências
-Bash
-npm install
-3. Configurar as Variáveis de Ambiente
+
+  2. Instalar as Dependências
+
+      npm install
+
+
+4. Configurar as Variáveis de Ambiente  
 Crie um arquivo .env na raiz do projeto (copiando as chaves do .env.example) e preencha com as suas credenciais locais do banco e chaves de autenticação:
 
-Snippet de código
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=sua_senha
-DB_DATABASE=rematricula
-JWT_SECRET=seu_segredo_jwt
-GOOGLE_CLIENT_ID=seu_client_id
-GOOGLE_CLIENT_SECRET=seu_client_secret
-4. Executar a Aplicação
-O TypeORM está configurado com synchronize: true, o que significa que todas as tabelas serão geradas automaticamente no banco assim que o servidor inicializar.
+Snippet de código: 
 
-Bash
-npm run start:dev
+
+DB_HOST=localhost  
+DB_PORT=5432  
+DB_USERNAME=postgres  
+DB_PASSWORD=sua_senha  
+DB_DATABASE=rematricula  
+JWT_SECRET=seu_segredo_jwt  
+GOOGLE_CLIENT_ID=seu_client_id  
+GOOGLE_CLIENT_SECRET=seu_client_secret  
+
+
+4. Executar a Aplicação  
+O TypeORM está configurado com synchronize: true, o que significa que todas as tabelas serão geradas automaticamente no banco assim que o servidor inicializar.  
+npm run start:dev  
 A API estará disponível em: http://localhost:3001
 
-📖 Documentação da API (Swagger)
-A API está totalmente documentada e pode ser testada visualmente através da interface do Swagger. Com o servidor rodando, acesse:
+📖 Documentação da API (Swagger) 
 
-👉 http://localhost:3001/api (ou a rota padrão configurada em seu main.ts)
+A API está totalmente documentada e pode ser testada visualmente através da interface do Swagger.  
+Com o servidor rodando, acesse:
 
-Principais Endpoints Disponíveis:
-Autenticação (/auth): POST /auth/login (Autenticação interna) | GET /auth/google (SSO Google)
+👉 http://localhost:3001/api (ou a rota padrão configurada em seu main.ts)  
+
+
+Principais Endpoints Disponíveis: 
+
+
+Autenticação (/auth): POST /auth/login (Autenticação interna) | GET /auth/google (SSO Google)  
+
 
 Alunos (/aluno): CRUD completo de estudantes.
 
@@ -76,9 +86,12 @@ Turmas (/turma): Abertura de turmas e listagem por período letivo (GET /turma/p
 
 Matrículas (/matricula): Realização de inscrições (POST /matricula) com travas automáticas de pré-requisitos e histórico de disciplinas cursadas.
 
-🧠 Regras de Negócio Implementadas
-Validação de Existência: O sistema impede operações com IDs de alunos ou turmas inexistentes (Retorna 404 Not Found).
+🧠 Regras de Negócio Implementadas  
+
+Validação de Existência: O sistema impede operações com IDs de alunos ou turmas inexistentes (Retorna 404 Not Found).  
 
 Trava de Pré-requisito: Um aluno não pode se matricular em uma turma cuja disciplina exija um pré-requisito que ele ainda não tenha concluído (Retorna 400 Bad Request). O sistema analisa dinamicamente o histórico de matrículas com situação CONCLUIDA.
 
-Proteção de Rotas: Endpoints sensíveis de escrita e leitura exigem o cabeçalho Authorization: Bearer <TOKEN_JWT>.
+Proteção de Rotas:  
+
+Endpoints sensíveis de escrita e leitura exigem o cabeçalho Authorization: Bearer <TOKEN_JWT>.
