@@ -1,16 +1,31 @@
 version: '3.8'
+
 services:
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: rematricula_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: sua_senha_aqui
+      POSTGRES_PASSWORD: sua_senha_secreta
       POSTGRES_DB: rematricula
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - rematricula_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: rematricula_cache
+    ports:
+      - "6379:6379"
+    networks:
+      - rematricula_net
 
 volumes:
   pgdata:
+
+networks:
+  rematricula_net:
+    driver: bridge
